@@ -29,10 +29,9 @@
       <ul class="todo-list">
         <li
           (dblclick)="updateTaskEditingMode(i)"
-          *ngFor="let item of tasks(); index as i"
+          *ngFor="let item of tasksByFilter(); index as i"
           [class.completed]="item.completed"
-          [class.editing]="item.editing"
-        >
+          [class.editing]="item.editing">
           <div class="view">
             <input
               class="toggle"
@@ -76,20 +75,20 @@
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
         <strong>{{ tasks().length }}</strong>
-        <span *ngIf="tasks().length === 1; else Singular">item</span>
+        <span *ngIf="tasks().length === 1; else Singular"> item</span>
         <ng-template #Singular>Items</ng-template>
       </span>
 
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a routerLink="/" class="selected">All</a>
+          <a (click)="changefilter('all')" class="selected">All</a>
         </li>
         <li>
-          <a routerLink="/pending">Pending</a>
+          <a (click)="changefilter('pending')" >Pending</a>
         </li>
         <li>
-          <a routerLink="/completed">Completed</a>
+          <a (click)="changefilter('completed')" >Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
