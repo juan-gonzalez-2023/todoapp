@@ -1,0 +1,88 @@
+<div class="container">
+  <h1>Hola mundo</h1>
+
+  <h2>{{ welcome }}</h2>
+
+  <ul>
+    <li *ngFor="let item of tasks(); let i = index">{{ i + 1 }} {{ item }}</li>
+  </ul>
+
+  <hr />
+
+  <h2>{{ "Hola".repeat(4) }}</h2>
+  <p>las suma de 3+3 = {{ 3 + 3 }}</p>
+  <p>Hola soy {{ name() }} y tengo {{ edad }} años</p>
+
+  <hr />
+
+  <img [src]="img" alt="" />
+  <input type="text" [value]="name" />
+  <button [disabled]="estado">Click me</button>
+
+  <p>person : {{ person.name }}</p>
+  <p>person : {{ person.edad }}</p>
+  <img [src]="person.img" alt="" />
+
+  <hr />
+
+  <button (click)="click($event)" [disabled]="estado">Click me</button>
+  <button (dblclick)="click($event)" [disabled]="estado">
+    Click me double
+  </button>
+  <p>(change)</p>
+  <input type="number" [value]="person.edad" (change)="changeHandelr($event)" />
+  <p>(key down)</p>
+  <input type="text" [value]="person.name" (keydown)="keyHandelr($event)" />
+  <p>(key down shift+t)</p>
+  <input type="text" [value]="person.name" (keydown.shift.t)="click($event)" />
+
+  <hr />
+
+  <h1>Signals</h1>
+  <input type="text" [value]="name()" (keyup)="changeHandelr($event)" />
+  <p>Nane: {{name()}}</p>
+
+  <ul>
+    <p>Total:  {{tasks().length}}</p>
+    <li *ngFor="let item of tasks();  index as i ">{{ i + 1 }} {{ item }}</li>
+  </ul>
+
+  <hr />
+
+  <div *ngIf="1 !== 1">
+    my contend
+  </div>
+
+
+  <div *ngIf="name() === 'Juan'">
+    soy {{person.name}}
+  </div>
+
+
+<!-- Fomrularios -->
+<hr />
+<input type="color" [formControl]="colorControl"/>
+<p>color:{{colorControl.value}}</p>
+
+<svg>
+  <g>
+    <rect x="200"  y="10" width="200" height="200" [attr.fill]="colorControl.value"/>
+  </g>
+</svg>
+
+
+<hr/>
+<input type="number" [formControl]="widthControl"/>
+<span class="box" [style.width.px]="widthControl.value"></span>
+
+
+<hr />
+
+<P>
+  <input type="text" [formControl]="nameControl"><br />
+  <span class="message-error" [class.show]="nameControl.invalid && nameControl.touched">Nombre invalido</span>
+</P>
+<p>
+  <input type="text" name="" id="">
+</p>
+</div>
