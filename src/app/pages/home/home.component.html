@@ -71,10 +71,10 @@
       </ul>
     </section>
     <!-- This footer should be hidden by default and shown when there are todos -->
-    <footer class="footer">
+    <footer class="footer" *ngIf="tasksByFilter().length > 0">
       <!-- This should be `0 items left` by default -->
       <span class="todo-count">
-        <strong>{{ tasks().length }}</strong>
+        <strong>{{ tasksByFilter().length }}</strong>
         <span *ngIf="tasks().length === 1; else Singular"> item</span>
         <ng-template #Singular>Items</ng-template>
       </span>
@@ -82,13 +82,13 @@
       <!-- Remove this if you don't implement routing -->
       <ul class="filters">
         <li>
-          <a (click)="changefilter('all')" class="selected">All</a>
+          <a (click)="changefilter('all')" [class.selected]="filter() === 'all'">All</a>
         </li>
         <li>
-          <a (click)="changefilter('pending')" >Pending</a>
+          <a (click)="changefilter('pending')" [class.selected]="filter() === 'pending'" >Pending</a>
         </li>
         <li>
-          <a (click)="changefilter('completed')" >Completed</a>
+          <a (click)="changefilter('completed')" [class.selected]="filter() === 'completed'">Completed</a>
         </li>
       </ul>
       <!-- Hidden if no completed items are left ↓ -->
